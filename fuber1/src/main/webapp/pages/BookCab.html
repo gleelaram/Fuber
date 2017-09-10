@@ -1,0 +1,25 @@
+<div>
+<div ng-show="booked" class="alert alert-success" role="alert">
+{{message}}
+</div>
+<div ng-show="Notbooked" class="alert alert-danger" role="alert">{{message}}</div>
+<form >
+<h1>From Address</h1>
+   <label>Longitude:</label>
+   <input type="text" ng-model="user.FromAddress.long">
+    <label>latitude:</label>
+   <input type="text" ng-model="user.FromAddress.lat">
+<h1>To Address</h1>
+   <label>Longitude:</label>
+   <input type="text" ng-model="user.ToAddress.long">
+    <label>latitude:</label>
+   <input type="text" ng-model="user.ToAddress.lat">
+   
+
+ <button class="btn btn-primary" ng-click="BookCabWithDetails()">Submit</button>
+ <button class="btn btn-primary" ng-click="Reset()">Reset</button>
+
+</form>
+
+
+</div>

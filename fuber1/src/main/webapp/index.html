@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="FuberApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Fuber</title>
+<!-- Loading scripts -->
+<script type="text/javascript" src="scripts/ExternalScripts/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/ExternalScripts/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.0/angular-route.js"></script>
+
+<!-- <script type="text/javascript" src="scripts/ExternalScripts/angular-route.js"></script> -->
+<script type="text/javascript" src="scripts/ExternalScripts/bootstrap.min.js"></script>
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+
+<!-- AngularFire -->
+<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDVYanI6VWW5BWSI375rUJXqZj5CPeqSj0",
+    authDomain: "fuber-4ae80.firebaseapp.com",
+    databaseURL: "https://fuber-4ae80.firebaseio.com",
+    projectId: "fuber-4ae80",
+    storageBucket: "",
+    messagingSenderId: "235341374496"
+  };
+  firebase.initializeApp(config);
+</script>
+
+<script type="text/javascript" src="scripts/AppScripts/app.js"></script>
+<script type="text/javascript" src="scripts/AppScripts/controllers/CabsController.js"></script>
+<script type="text/javascript" src="scripts/AppScripts/controllers/BookCabController.js"></script>
+
+
+
+
+<!-- Loading css -->
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
+<link rel="stylesheet" href="css/bootstrap-responsive.min.css"/>
+
+
+</head>
+<body>
+
+<div ng-view></div>
+
+<!-- <div id="footer">
+        <div class="navbar navbar-fixed-bottom">
+            <div class="navbar-inner">
+                <div class="container">
+                    <footer>
+                        <div class="row">
+                            <div class="span4">
+                                Created by Fuber Team
+                            </div>
+                            <div class="span4">
+                                Site: <a href="#">@FUBER</a>
+                            </div>
+                            <div class="span4">
+                                Blog: <a href="#">support.fuber.com</a>
+                            </div>
+                        </div>
+                   </footer>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</body>
+</html>

@@ -1,0 +1,20 @@
+<div>
+<h1>Available Cars</h1>
+<table class="table table-striped" border=1>
+<thead>
+<tr>
+<th>S.no</th>
+<th>Car Name</th>
+<th>Car Color</th>
+</tr>
+</thead>
+<tr ng-repeat= "car in CarsList | fiter: car.booked">
+<td>{{$index}}</td>
+<td>{{car.name}}</td>
+<td>{{car.color}}</td>
+</tr>
+</table>
+
+<button class="btn btn-primary" ng-click="bookcab()">Book a cab</button>
+
+</div>
