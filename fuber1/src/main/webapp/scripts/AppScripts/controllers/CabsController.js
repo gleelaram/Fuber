@@ -2,7 +2,7 @@ fuber.controller('CabsCtrl',['$scope','$location','$firebaseArray','$firebaseObj
 	var ref = firebase.database().ref().child('Cars');
 	console.log(ref);
 	
-	$rootScope.CarsList = $firebaseArray(ref);
+	$scope.CarsList = $firebaseArray(ref);
 	
 	
 	//$scope.CarsList=[{name:'maruthi',color:'white'},{name:'tayota',color:'white'},{name:'tata',color:'pink'}];
