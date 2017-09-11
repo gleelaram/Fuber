@@ -3,6 +3,7 @@ fuber.controller('CabsCtrl',['$scope','$location','$firebaseArray','$firebaseObj
 	console.log(ref);
 	
 	$scope.CarsList = $firebaseArray(ref);
+	console.log("Hai");
 	
 	
 	//$scope.CarsList=[{name:'maruthi',color:'white'},{name:'tayota',color:'white'},{name:'tata',color:'pink'}];
