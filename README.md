@@ -3,9 +3,71 @@ This app is used for booking cabs from the group of cabs that owner has.when a u
 
 
 
-In this is used firebase and spring mvc and angularjs 
+In this project I have used angularjs,firebase and spring mvc
 
 
-When you want to see the full flow of angularjs+spring mvc comment the firebase code or keep on the rest remaining comment those.
+When you want to see the full flow of angularjs+spring mvc please keep the rest call and comment the other code(which is code for firebase).
 
-when you want the see the firebase work please comment the rest call .
+When you want to see the full flow of angualarjs+firebase please comment the rest call.
+
+
+Folder structer as follows 
+
+      fuber1
+        |
+        |
+        |-------------------------src
+        |                          |
+        |                          |
+        |                          |-----main
+                                   |        |
+                                   |        |---java
+                                            |     |-------com
+                                   |        |              |
+                                   |        |               |-----quintype
+                                   |        |                       |
+                                   |        |                       |----fuber1
+                                   |        |                                |-----controller
+                                   |        |                                |         |-----BookCabController 
+                                   |        |                                |
+                                   |        |                                |-----service
+                                   |        |                                |        |-------CabService.java
+                                   |        |                                |        |-------CabServiceImpl.java
+                                   |        |                                |
+                                   |        |                                |-----dao
+                                   |        |                                |      |-------CabDao.java
+                                   |        |                                |      |-------CabDaoImpl.java
+                                   |        |                                |
+                                   |        |                                |-----dto
+                                   |        |                                      |-------Car.java
+                                   |        |                                       |-------Location.java
+                                   |        |                                      |-------User.java
+                                   |        |
+                                   |        |
+                                   |        |--------webapp
+                                   |            |
+                                   |            |
+                                   |         |  |---------WEB-INF
+                                   |         |  |           |
+                                   |         |  |           |----Fuber-servlet.xml
+                                   |         |  |           |----web.xml
+                                   |         |  |
+                                   |         |  |---------css
+                                   |         |  |
+                                   |         |  |---------pages
+                                   |         |  |
+                                   |         |  |---------scripts
+                                   |            |--------index.html
+                                   |
+                                   |             
+                                   |-----test
+                                   |
+                                   |        
+        
+        
+        
+        
+        |
+        |------pom.xml             
+
+
