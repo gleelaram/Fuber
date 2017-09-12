@@ -76,12 +76,6 @@ fuber.controller('BookCabCtrl',['$scope','$firebaseArray','$firebaseObject',func
 			$scope.booked=true;
 			$scope.user="";
 			$scope.user.SelectedColor="";
-			
-			
-			
-			
-
-
 	    });
 		
 	}
