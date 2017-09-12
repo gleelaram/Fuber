@@ -1,8 +1,8 @@
-fuber.controller('CabsCtrl',['$scope',$rootScope','$location','$firebaseArray','$firebaseObject',function($scope,$rootScope,$location,$firebaseArray,$firebaseObject){
+fuber.controller('CabsCtrl',['$scope','$rootScope','$location','$firebaseArray','$firebaseObject',function($scope,$rootScope,$location,$firebaseArray,$firebaseObject){
 	var ref = firebase.database().ref().child('Cars');
 	console.log(ref);
 	
-	$rootScope.CarsList = $firebaseArray(ref);
+	$scope.CarsList = $firebaseArray(ref);
 	console.log("Hai");
 	
 	
