@@ -2,10 +2,13 @@ fuber.controller('BookCabCtrl',['$scope','$firebaseArray','$firebaseObject',func
 	$scope.BookCabWithDetails=function()
 	{
 		var Amount = firebase.database().ref().child('AmountDetails');
+		var AmountList=$firebaseArray(Amount);
 		var ref = firebase.database().ref().child('Cars');
 		var CarsList=$firebaseArray(ref);
 		var arrayOfAvailbleCarswithDistance=[];
 		var count=0;
+		CarsList.$loaded()
+	    .then(function(){
 		for(i=0;i<CarsList.length;i++)
 		{
 			if(!CarsList[i].booked)
@@ -17,14 +20,25 @@ fuber.controller('BookCabCtrl',['$scope','$firebaseArray','$firebaseObject',func
 		}
 		var finalbookedcar=findNearestCar(arrayOfAvailbleCarswithDistance)[0];
 		var cost=CostForTravel(finalbookedcar,$scope.user.ToAddress,$scope.user.FromAddress);
-	
-		Amount.$add({
-		    "userid" : 2,
-		    "amount" : cost,
-		    "carid" : finalbookedcar.id,
-		    "fromlocation" : $scope.user.FromAddress,
-			"tolocation" : $scope.user.ToAddress
-		});
+	    var amountObject={
+			    "userid" : 2,
+			    "amount" : cost,
+			    "car" : finalbookedcar.car,
+			    "fromlocation" : $scope.user.FromAddress,
+				"tolocation" : $scope.user.ToAddress
+			};
+	    console.log(amountObject);
+	    console.log(AmountList.length);
+		
+	    AmountList.$add(amountObject).then(function(ref) {
+	    	  console.log("added record");
+	    	 // returns location in the array
+	    	});
+		/*Amount.$save().then(function(ref) {
+			  ref.key() === Amount.$id; // true
+		}, function(error) {
+		  console.log("Error:", error);
+		});*/
 		
 		
 		
@@ -36,18 +50,16 @@ fuber.controller('BookCabCtrl',['$scope','$firebaseArray','$firebaseObject',func
 			
 
 
-		
+	    });
 		
 	}
 	
 	var CostForTravel=function(cardistance,ToAddress,FromAddress){
 	
-		var t1=new Date();//t1
-		var t2=new Date(t1.getMinutes()+(cardistance.distance*5));// ideal time 1 hour = 12Kms ,1min = 1/5km, cardistance.distance*5
+		// ideal time 1 hour = 12Kms ,1min = 1/5km, cardistance.distance*5
 	    var distanceFromAndToAddress=distanceCalculation(ToAddress,FromAddress);
-	    var t3=new Date(t2.getMinutes+(distanceFromAndToAddress*5));
-	    var travelTimeInMins = TimeDifferenceInMin(t2,t3);
-	    var TotalCost= travelTimeInMins*1+distanceFromAndToAddress*2
+	    
+	    var TotalCost= ((distanceFromAndToAddress*5*1)+(distanceFromAndToAddress*2));
 	    if(cardistance.car.color=='pink')
 	    	{
 	    	TotalCost=TotalCost+5;
@@ -77,32 +89,29 @@ fuber.controller('BookCabCtrl',['$scope','$firebaseArray','$firebaseObject',func
 	var findNearestCar =function(list)
 	{
 		var length = list.length;
-	    for (var i = (length - 1); i >= 0; i--) {
-	        //Number of passes
-	        for (var j = (length - i); j > 0; j--) {
-	            //Compare the adjacent positions
-	            if (list[j].distance < list[j - 1].distance) {
-	                //Swap the numbers
-	                var tmp = list[j];
-	                list[j] = list[j - 1];
-	                list[j - 1] = tmp;
-	            }
-	        }
-	    }	
+		for(var i = 0; i < length; i++) {
+		    for(var j = 1; j < length; j++) {
+		      if(list[j - 1] < list[j]) {
+		    	  var temp = list[i];
+		    	  list[i] = list[j];
+		    	  list[j] = temp;
+		      }
+		    }
+		  }
 	    return list;
 		}
 	
 	var findDistanceFromCar=function(car,userFromAddress)
 	{
 		var distance=distanceCalculation(car.location,userFromAddress);
-		return {"car":car,"distance":sqrt_distance};
+		return {"car":car,"distance":distance};
 		 
 	}
 	
 	var distanceCalculation=function(ToAddress,FromAddress)
 	{
-		var dx=71.5(ToAddress.lng-FromAddress.lng);
-		var dy=111.3(ToAddress.lat-FromAddress.lat);
+		var dx=71.5*(ToAddress.lng-FromAddress.lng);
+		var dy=111.3*(ToAddress.lat-FromAddress.lat);
 		var distance =((dx*dx)+(dy*dy));
 		var sqrt_distance=Math.sqrt(distance);
 		return sqrt_distance
