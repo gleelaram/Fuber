@@ -4,6 +4,7 @@
 </div>
 <div ng-show="Notbooked" class="alert alert-danger" role="alert">{{message}}</div>
 <form >
+<fieldset>
 <h1>From Address</h1>
    <label>Longitude:</label>
    <input type="text" ng-model="user.FromAddress.lng">
@@ -14,11 +15,16 @@
    <input type="text" ng-model="user.ToAddress.lng">
     <label>latitude:</label>
    <input type="text" ng-model="user.ToAddress.lat">
-   
+   <label>Car Colo:</label>
+   <select ng-model="user.SelectedColor">
+   <option ng-repeat="color in colorList" value={{color}}>{{color}}</option>
+   </select>
+  <br> 
+
 
  <button class="btn btn-primary" ng-click="BookCabWithDetails()">Submit</button>
  <button class="btn btn-primary" ng-click="Reset()">Reset</button>
-
+</fieldset>
 </form>
 
 
