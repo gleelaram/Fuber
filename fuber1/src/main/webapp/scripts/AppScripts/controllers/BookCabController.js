@@ -1,6 +1,21 @@
 fuber.controller('BookCabCtrl',['$scope','$firebaseArray','$firebaseObject',function($scope,$firebaseArray,$firebaseObject){
 	$scope.BookCabWithDetails=function()
 	{
+		
+		if($scope.user.FromAddress ==null ||$scope.user.ToAddress ==null || $scope.user.SelectedColor == null || $scope.user.SelectedColor =="" )
+			{
+			 
+			 $scope.message="Please select the fileds to book cab";
+				
+				$scope.booked=true;	
+				return;
+			}
+		if(($scope.user.FromAddress.lng==$scope.user.ToAddress.lng) && ($scope.user.FromAddress.lat ==$scope.user.ToAddress.lat))
+		{
+			$scope.message="From and To address are same";
+			$scope.booked=true;
+			return;
+		}
 		var Amount = firebase.database().ref().child('AmountDetails');
 		var AmountList=$firebaseArray(Amount);
 		var ref = firebase.database().ref().child('Cars');
@@ -11,12 +26,18 @@ fuber.controller('BookCabCtrl',['$scope','$firebaseArray','$firebaseObject',func
 	    .then(function(){
 		for(i=0;i<CarsList.length;i++)
 		{
-			if(!CarsList[i].booked)
+			if(!CarsList[i].booked && CarsList[i].color==$scope.user.SelectedColor)
 				{
 				 arrayOfAvailbleCarswithDistance[count]=findDistanceFromCar(CarsList[i],$scope.user.FromAddress)
 				 count++;
 			
 				}
+		}
+		if(count==0)
+		{
+            $scope.message="Cabs not available";
+			
+			$scope.booked=true;	
 		}
 		var finalbookedcar=findNearestCar(arrayOfAvailbleCarswithDistance)[0];
 		var cost=CostForTravel(finalbookedcar,$scope.user.ToAddress,$scope.user.FromAddress);
@@ -46,6 +67,10 @@ fuber.controller('BookCabCtrl',['$scope','$firebaseArray','$firebaseObject',func
 			$scope.message="Cab no:"+finalbookedcar.id+"is booked and the cost is"+cost;
 			
 			$scope.booked=true;
+			$scope.user="";
+			$scope.$scope.user.SelectedColor="";
+			
+			
 			
 			
 
@@ -70,22 +95,6 @@ fuber.controller('BookCabCtrl',['$scope','$firebaseArray','$firebaseObject',func
 		
 		
 	}
-	
-	var TimeDifferenceInMin=function(date1,date2)
-	{
-		 // Convert both dates to milliseconds
-		  var date1_ms = date1.getTime();
-		  var date2_ms = date2.getTime();
-
-		  // Calculate the difference in milliseconds
-		  var difference_ms = date2_ms - date1_ms;
-		  //take out milliseconds
-		  difference_ms = difference_ms/1000;
-		  difference_ms = difference_ms/60; 
-		  var minutes = Math.floor(difference_ms % 60);
-		  return minutes;
-	}
-	
 	var findNearestCar =function(list)
 	{
 		var length = list.length;
@@ -121,8 +130,8 @@ fuber.controller('BookCabCtrl',['$scope','$firebaseArray','$firebaseObject',func
 	$scope.Reset=function()
 	{
 		$scope.user="";	
+		$scope.user.SelectedColor="";
 		$scope.booked=false;
 		$scope.Notbooked=false;
-	}
-		
+	}	
 }]);
