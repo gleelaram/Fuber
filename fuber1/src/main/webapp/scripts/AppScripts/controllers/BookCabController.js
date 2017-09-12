@@ -48,10 +48,17 @@ fuber.controller('BookCabCtrl',['$scope','$firebaseArray','$firebaseObject',func
 			    "fromlocation" : $scope.user.FromAddress,
 				"tolocation" : $scope.user.ToAddress
 			};
+	    finalbookedcar.car.location = $scope.user.ToAddress;
+	    console.log(finalbookedcar.car.location);
 	    console.log(amountObject);
 	    console.log(AmountList.length);
 		
 	    AmountList.$add(amountObject).then(function(ref) {
+	    	  console.log("added record");
+	    	  
+	    	  CarsList.$save(finalbookedcar.car).then(function(ref) {
+	    		  console.log("added record");
+	    	  })
 	    	  console.log("added record");
 	    	 // returns location in the array
 	    	});
@@ -64,11 +71,11 @@ fuber.controller('BookCabCtrl',['$scope','$firebaseArray','$firebaseObject',func
 		
 		
 		
-			$scope.message="Cab no:"+finalbookedcar.id+"is booked and the cost is"+cost;
+			$scope.message="Cab no: "+finalbookedcar.car.regNo+ "is booked and the cost is "+cost;
 			
 			$scope.booked=true;
 			$scope.user="";
-			$scope.$scope.user.SelectedColor="";
+			$scope.user.SelectedColor="";
 			
 			
 			
